@@ -391,7 +391,7 @@ body::before {
   max-width: 780px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 16px;
   gap: 16px;
@@ -399,11 +399,13 @@ body::before {
 
 .action-bar-content .btn-secondary {
   padding: 14px 24px;
+  white-space: nowrap;
 }
 
 .action-bar-content .btn-primary {
-  flex: 1;
-  max-width: 300px;
+  padding: 14px 32px;
+  white-space: nowrap;
+  flex: 0 1 300px;
 }
 
 .action-bar-content .btn-primary.full-width {
