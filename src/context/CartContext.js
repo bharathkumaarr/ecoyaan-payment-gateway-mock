@@ -74,6 +74,31 @@ function cartReducer(state, action) {
       };
     }
 
+    case 'REMOVE_SAVED_ADDRESS': {
+      const addressToRemove = action.payload;
+      const filteredAddresses = state.savedAddresses.filter(
+        (addr) =>
+          addr.fullName !== addressToRemove.fullName ||
+          addr.phone !== addressToRemove.phone
+      );
+
+      let newShippingAddress = state.shippingAddress;
+      // If the currently selected address was removed, clear it or pick the first available
+      if (
+        state.shippingAddress &&
+        state.shippingAddress.fullName === addressToRemove.fullName &&
+        state.shippingAddress.phone === addressToRemove.phone
+      ) {
+        newShippingAddress = filteredAddresses.length > 0 ? filteredAddresses[0] : null;
+      }
+
+      return {
+        ...state,
+        savedAddresses: filteredAddresses,
+        shippingAddress: newShippingAddress,
+      };
+    }
+
     case 'PLACE_ORDER':
       return {
         ...state,
