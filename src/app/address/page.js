@@ -159,7 +159,7 @@ export default function AddressPage() {
         </div>
 
         {savedAddresses.length > 0 && !showNewAddressForm && (
-          <div className="saved-addresses animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+          <div className="saved-addresses stagger-children" style={{ animationDelay: '0.15s' }}>
             {savedAddresses.map((addr, index) => {
               const isSelected = state.shippingAddress &&
                 state.shippingAddress.fullName === addr.fullName &&
@@ -180,7 +180,6 @@ export default function AddressPage() {
                       onClick={(e) => {
                         e.stopPropagation();
                         dispatch({ type: 'REMOVE_SAVED_ADDRESS', payload: addr });
-                        // If we just deleted the last address, show the form
                         if (savedAddresses.length <= 1) {
                           setShowNewAddressForm(true);
                         }
@@ -224,7 +223,7 @@ export default function AddressPage() {
         )}
 
         {showNewAddressForm && (
-          <div className="new-address-form animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+          <div className="new-address-form animate-fade-in" style={{ animationDelay: '0.15s' }}>
             {savedAddresses.length > 0 && (
               <div className="form-header">
                 <h3>Add a new address</h3>
@@ -267,7 +266,7 @@ export default function AddressPage() {
         )}
       </div>
 
-      <div className="sticky-action-bar animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+      <div className="sticky-action-bar animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <div className="action-bar-content">
           <button className="btn-secondary" onClick={() => router.push('/')}>
             Back

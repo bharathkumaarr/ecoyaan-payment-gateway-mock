@@ -8,8 +8,11 @@ import OrderSummaryCard from '@/components/OrderSummaryCard';
 
 export default function ConfirmPage() {
   const router = useRouter();
-  const { state, dispatch, subtotal, grandTotal } = useCart();
+  const { state, dispatch, subtotal, grandTotal, isInitialized } = useCart();
   const [processing, setProcessing] = useState(false);
+
+  // Wait for hydration
+  if (!isInitialized) return null;
 
   // Redirect if no address or cart is empty
   if (!state.shippingAddress || state.cartItems.length === 0) {
@@ -30,8 +33,8 @@ export default function ConfirmPage() {
   };
 
   return (
-    <div className="container" style={{ paddingBottom: '120px' }}>
-      <header className="page-header animate-fade-in-up">
+    <div className="container" style={{ paddingBottom: '120px', opacity: isInitialized ? 1 : 0, transition: 'opacity 0.4s ease' }}>
+      <header className="page-header animate-fade-in">
         <button className="btn-back" onClick={() => router.push('/address')}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
@@ -53,13 +56,12 @@ export default function ConfirmPage() {
       </header>
 
       <StepIndicator currentStep={3} />
-
-      <div className="section-header animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+      <div className="section-header animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <h1 className="section-title">Review & Pay</h1>
       </div>
 
       {/* Order Items */}
-      <div className="glass-card review-section animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+      <div className="glass-card review-section animate-fade-in" style={{ animationDelay: '0.15s' }}>
         <h2 className="review-heading">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
@@ -80,7 +82,7 @@ export default function ConfirmPage() {
       </div>
 
       {/* Shipping Address */}
-      <div className="glass-card review-section animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+      <div className="glass-card review-section animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <h2 className="review-heading">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -99,7 +101,7 @@ export default function ConfirmPage() {
       </div>
 
       {/* Order Total */}
-      <div className="glass-card-accent review-section animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
+      <div className="glass-card-accent review-section animate-fade-in" style={{ animationDelay: '0.25s' }}>
         <OrderSummaryCard
           subtotal={subtotal}
           shippingFee={state.shippingFee}

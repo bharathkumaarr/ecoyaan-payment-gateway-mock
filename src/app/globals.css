@@ -262,7 +262,7 @@ body::before {
 /* Stagger children */
 .stagger-children>* {
   opacity: 0;
-  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 .stagger-children>*:nth-child(1) {
