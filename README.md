@@ -1,6 +1,7 @@
 # Ecoyaan Checkout Flow
 
 A simplified checkout flow built with **Next.js 14** (App Router), featuring dark mode, monospace typography, glassmorphism design, and server-side rendering.
+
 ---
 
 ## Features
@@ -9,7 +10,6 @@ A simplified checkout flow built with **Next.js 14** (App Router), featuring dar
 - **3-Step Checkout Flow** — Cart → Shipping Address → Confirm & Pay → Success
 - **Form Validation** — Real-time field-level validation with inline error messages (email regex, 10-digit phone, 6-digit PIN)
 - **State Management** — React Context API with `useReducer` for predictable state transitions across all pages
-
 - **Micro-Animations** — Fade-in-up stagger effects, animated checkmark on success, pulsing ring, floating backgrounds
 - **Responsive** — Adapts cleanly from desktop (780px container) to mobile (single-column layout)
 - **Mock API** — Next.js API route (`/api/cart`) serving the provided product data
