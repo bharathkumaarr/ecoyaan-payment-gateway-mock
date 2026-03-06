@@ -7,7 +7,7 @@ const mockCartData = {
             product_name: 'Bamboo Toothbrush (Pack of 4)',
             product_price: 299,
             quantity: 2,
-            image: '/bamboo-toothbrush.png',
+            image: 'https://via.placeholder.com/150',
         },
         {
             product_id: 102,
