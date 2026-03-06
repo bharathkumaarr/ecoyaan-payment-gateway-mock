@@ -2,9 +2,9 @@ import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 
 export const metadata = {
-  title: 'Ecoyaan — Sustainable Checkout',
+  title: 'Ecoyaan - Sustainable Checkout',
   description: 'Complete your eco-friendly purchase with Ecoyaan. Sustainable products for a better planet.',
-  keywords: ['ecoyaan', 'sustainable', 'eco-friendly', 'checkout', 'green shopping'],
+  keywords: ['ecoyaan', 'sustaaddinable', 'eco-friendly', 'checkout', 'green shopping'],
 };
 
 export default function RootLayout({ children }) {
