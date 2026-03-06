@@ -39,17 +39,16 @@ export default function ConfirmPage() {
           </svg>
           Back
         </button>
-        <div className="brand-wrapper">
-          <div className="brand">
-            <img
-              src="https://prod-cdn.ecoyaan.com/pb-cs-app/images/ecoyaan-favicon.ico"
-              alt="Ecoyaan Logo"
-              width="28"
-              height="28"
-            />
+        <div className="brand-container">
+          <img
+            src="https://prod-cdn.ecoyaan.com/pb-cs-app/images/ecoyaan-favicon.ico"
+            alt="Ecoyaan Logo"
+            className="brand-logo"
+          />
+          <div className="brand-text">
             <span className="brand-name">Ecoyaan</span>
+            <span className="brand-tagline">Sustainability made easy</span>
           </div>
-          <span className="brand-tagline">Sustainability made easy</span>
         </div>
       </header>
 
@@ -166,30 +165,37 @@ export default function ConfirmPage() {
           color: var(--text-primary);
         }
 
-        .brand-wrapper {
+        .brand-container {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .brand-logo {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+
+        .brand-text {
           display: flex;
           flex-direction: column;
-          align-items: flex-end;
+          align-items: flex-start;
           gap: 2px;
         }
 
-        .brand {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
         .brand-name {
-          font-size: 1.1rem;
+          font-size: 1.5rem;
           font-weight: 700;
           color: var(--accent);
-          letter-spacing: 0.04em;
+          line-height: 1;
+          letter-spacing: 0.02em;
         }
 
         .brand-tagline {
-          font-size: 0.65rem;
-          color: var(--text-muted);
-          letter-spacing: 0.02em;
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+          line-height: 1;
         }
 
         .section-header {

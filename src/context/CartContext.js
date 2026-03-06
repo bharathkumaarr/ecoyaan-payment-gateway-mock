@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer, useEffect, useState } from 'react';
 
 const CartContext = createContext(null);
 
@@ -9,12 +9,16 @@ const initialState = {
   shippingFee: 0,
   discountApplied: 0,
   shippingAddress: null,
+  savedAddresses: [],
   orderPlaced: false,
   orderId: null,
 };
 
 function cartReducer(state, action) {
   switch (action.type) {
+    case 'INIT_STATE':
+      return action.payload;
+
     case 'SET_CART':
       return {
         ...state,
@@ -46,6 +50,30 @@ function cartReducer(state, action) {
         shippingAddress: action.payload,
       };
 
+    case 'ADD_SAVED_ADDRESS': {
+      const newAddress = action.payload;
+      const existingIndex = state.savedAddresses.findIndex(
+        (addr) =>
+          addr.fullName === newAddress.fullName &&
+          addr.email === newAddress.email &&
+          addr.phone === newAddress.phone &&
+          addr.pinCode === newAddress.pinCode &&
+          addr.city === newAddress.city &&
+          addr.state === newAddress.state
+      );
+      if (existingIndex >= 0) {
+        return {
+          ...state,
+          shippingAddress: newAddress,
+        };
+      }
+      return {
+        ...state,
+        savedAddresses: [...state.savedAddresses, newAddress],
+        shippingAddress: newAddress,
+      };
+    }
+
     case 'PLACE_ORDER':
       return {
         ...state,
@@ -63,6 +91,28 @@ function cartReducer(state, action) {
 
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const savedState = localStorage.getItem('ecoyaan_checkout_state');
+    if (savedState) {
+      try {
+        const parsed = JSON.parse(savedState);
+        dispatch({ type: 'INIT_STATE', payload: parsed });
+      } catch (e) {
+        console.error('Failed to parse saved state', e);
+      }
+    }
+    setIsInitialized(true);
+  }, []);
+
+  // Save to localStorage whenever state changes
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem('ecoyaan_checkout_state', JSON.stringify(state));
+    }
+  }, [state, isInitialized]);
 
   const subtotal = state.cartItems.reduce(
     (sum, item) => sum + item.product_price * item.quantity,
