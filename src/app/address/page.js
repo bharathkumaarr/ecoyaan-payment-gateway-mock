@@ -101,7 +101,18 @@ export default function AddressPage() {
                     </svg>
                     Back
                 </button>
-                <span className="brand-name">ecoyaan</span>
+                <div className="brand-wrapper">
+                    <div className="brand">
+                        <img
+                            src="https://prod-cdn.ecoyaan.com/pb-cs-app/images/ecoyaan-favicon.ico"
+                            alt="Ecoyaan Logo"
+                            width="28"
+                            height="28"
+                        />
+                        <span className="brand-name">Ecoyaan</span>
+                    </div>
+                    <span className="brand-tagline">Sustainability made easy</span>
+                </div>
             </header>
 
             <StepIndicator currentStep={2} />
@@ -177,11 +188,30 @@ export default function AddressPage() {
           color: var(--text-primary);
         }
 
+        .brand-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 2px;
+        }
+
+        .brand {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
         .brand-name {
           font-size: 1.1rem;
           font-weight: 700;
           color: var(--accent);
           letter-spacing: 0.04em;
+        }
+
+        .brand-tagline {
+          font-size: 0.65rem;
+          color: var(--text-muted);
+          letter-spacing: 0.02em;
         }
 
         .section-header {

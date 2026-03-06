@@ -34,13 +34,17 @@ export default function CartClient({ cartData }) {
     return (
         <div className="container">
             <header className="page-header animate-fade-in-up">
-                <div className="brand">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                        <path d="M2 17l10 5 10-5" />
-                        <path d="M2 12l10 5 10-5" />
-                    </svg>
-                    <span className="brand-name">ecoyaan</span>
+                <div className="brand-wrapper">
+                    <div className="brand">
+                        <img
+                            src="https://prod-cdn.ecoyaan.com/pb-cs-app/images/ecoyaan-favicon.ico"
+                            alt="Ecoyaan Logo"
+                            width="28"
+                            height="28"
+                        />
+                        <span className="brand-name">Ecoyaan</span>
+                    </div>
+                    <span className="brand-tagline">Sustainability made easy</span>
                 </div>
             </header>
 
@@ -100,6 +104,13 @@ export default function CartClient({ cartData }) {
           padding-top: 8px;
         }
 
+        .brand-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 2px;
+        }
+
         .brand {
           display: flex;
           align-items: center;
@@ -111,6 +122,12 @@ export default function CartClient({ cartData }) {
           font-weight: 700;
           color: var(--accent);
           letter-spacing: 0.04em;
+        }
+
+        .brand-tagline {
+          font-size: 0.65rem;
+          color: var(--text-muted);
+          letter-spacing: 0.02em;
         }
 
         .section-header {
