@@ -48,6 +48,18 @@ export default function AddressPage() {
 
   useEffect(() => {
     if (!isInitialized) return;
+
+    // Load form draft if it exists
+    const draft = localStorage.getItem('ecoyaan_address_draft');
+    if (draft) {
+      try {
+        const parsedDraft = JSON.parse(draft);
+        setForm(prev => ({ ...prev, ...parsedDraft }));
+      } catch (e) {
+        console.error('Failed to parse address draft', e);
+      }
+    }
+
     if (savedAddresses.length === 0) {
       setShowNewAddressForm(true);
     } else if (!state.shippingAddress) {
@@ -55,6 +67,13 @@ export default function AddressPage() {
       dispatch({ type: 'SET_ADDRESS', payload: savedAddresses[0] });
     }
   }, [isInitialized, savedAddresses.length, state.shippingAddress, dispatch, savedAddresses]);
+
+  // Save form draft whenever it changes
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem('ecoyaan_address_draft', JSON.stringify(form));
+    }
+  }, [form, isInitialized]);
 
   // Redirect if cart is empty
   if (isInitialized && state.cartItems.length === 0) {
@@ -420,55 +439,11 @@ export default function AddressPage() {
           grid-column: 1 / -1;
         }
         
-        /* Sticky Action Bar */
-        .sticky-action-bar {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: rgba(10, 10, 15, 0.8);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border-top: 1px solid var(--border-subtle);
-          padding: 20px 0;
-          z-index: 100;
-          box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        .action-bar-content {
-          max-width: 780px;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0 16px;
-          gap: 16px;
-        }
-        
-        .action-bar-content .btn-secondary {
-          padding: 14px 24px;
-        }
-        
-        .action-bar-content .btn-primary {
-          flex: 1;
-          max-width: 300px;
-        }
-
-        @media (max-width: 640px) {
-          .action-bar-content {
-            padding: 0 24px;
-          }
-        }
-
         @media (max-width: 480px) {
           .form-grid {
             grid-template-columns: 1fr;
             padding: 20px;
             gap: 16px;
-          }
-          
-          .action-bar-content .btn-secondary {
-            padding: 14px 16px;
           }
         }
       `}</style>

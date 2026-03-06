@@ -32,7 +32,7 @@ export default function CartClient({ cartData }) {
   };
 
   return (
-    <div className="container" style={{ opacity: isInitialized ? 1 : 0, transition: 'opacity 0.4s ease' }}>
+    <div className="container" style={{ opacity: isInitialized ? 1 : 0, transition: 'opacity 0.4s ease', paddingBottom: '120px' }}>
       <header className="page-header animate-fade-in">
         <div className="brand-container">
           <img
@@ -72,27 +72,33 @@ export default function CartClient({ cartData }) {
       )}
 
       {items.length > 0 && (
-        <div className="summary-section animate-fade-in" style={{ animationDelay: '0.25s' }}>
-          <div className="glass-card-accent">
-            <OrderSummaryCard
-              subtotal={calcSubtotal}
-              shippingFee={shipping}
-              discount={discount}
-              grandTotal={calcTotal}
-            />
+        <>
+          <div className="summary-section animate-fade-in" style={{ animationDelay: '0.25s' }}>
+            <div className="glass-card-accent">
+              <OrderSummaryCard
+                subtotal={calcSubtotal}
+                shippingFee={shipping}
+                discount={discount}
+                grandTotal={calcTotal}
+              />
+            </div>
           </div>
 
-          <button
-            className="btn-primary checkout-btn"
-            onClick={() => router.push('/address')}
-          >
-            Proceed to Checkout
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </button>
-        </div>
+          <div className="sticky-action-bar animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <div className="action-bar-content" style={{ justifyContent: 'flex-end' }}>
+              <button
+                className="btn-primary"
+                onClick={() => router.push('/address')}
+              >
+                Proceed to Checkout
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </>
       )}
 
       <style jsx>{`

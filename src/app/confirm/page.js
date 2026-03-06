@@ -30,7 +30,7 @@ export default function ConfirmPage() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ paddingBottom: '120px' }}>
       <header className="page-header animate-fade-in-up">
         <button className="btn-back" onClick={() => router.push('/address')}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -109,27 +109,33 @@ export default function ConfirmPage() {
       </div>
 
       {/* Pay Button */}
-      <button
-        className={`btn-primary pay-btn animate-fade-in-up ${processing ? 'processing' : ''}`}
-        onClick={handlePay}
-        disabled={processing}
-        style={{ animationDelay: '0.3s' }}
-      >
-        {processing ? (
-          <>
-            <span className="spinner" />
-            Processing...
-          </>
-        ) : (
-          <>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-              <line x1="1" y1="10" x2="23" y2="10" />
-            </svg>
-            Pay Securely — ₹{grandTotal}
-          </>
-        )}
-      </button>
+      <div className="sticky-action-bar animate-fade-in" style={{ animationDelay: '0.3s' }}>
+        <div className="action-bar-content">
+          <button className="btn-secondary" onClick={() => router.push('/address')}>
+            Back
+          </button>
+          <button
+            className={`btn-primary pay-btn ${processing ? 'processing' : ''}`}
+            onClick={handlePay}
+            disabled={processing}
+          >
+            {processing ? (
+              <>
+                <span className="spinner" />
+                Processing...
+              </>
+            ) : (
+              <>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+                Pay Securely — ₹{grandTotal}
+              </>
+            )}
+          </button>
+        </div>
+      </div>
 
       <p className="security-note animate-fade-in" style={{ animationDelay: '0.35s' }}>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -279,13 +285,6 @@ export default function ConfirmPage() {
         .address-line {
           font-size: 0.8rem;
           color: var(--text-secondary);
-        }
-
-        .pay-btn {
-          width: 100%;
-          margin-top: 8px;
-          padding: 18px;
-          font-size: 0.9rem;
         }
 
         .pay-btn.processing {

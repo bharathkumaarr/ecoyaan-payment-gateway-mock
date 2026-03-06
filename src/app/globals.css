@@ -371,3 +371,53 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
+
+/* Sticky Action Bar */
+.sticky-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-subtle);
+  padding: 20px 0;
+  z-index: 100;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.action-bar-content {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  gap: 16px;
+}
+
+.action-bar-content .btn-secondary {
+  padding: 14px 24px;
+}
+
+.action-bar-content .btn-primary {
+  flex: 1;
+  max-width: 300px;
+}
+
+.action-bar-content .btn-primary.full-width {
+  max-width: none;
+}
+
+@media (max-width: 640px) {
+  .action-bar-content {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-bar-content .btn-secondary {
+    padding: 14px 16px;
+  }
+}
