@@ -182,7 +182,7 @@ body::before {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
 
   to {
@@ -204,7 +204,7 @@ body::before {
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 
   to {
@@ -248,15 +248,15 @@ body::before {
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease forwards;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: scaleIn 0.4s ease-out forwards;
 }
 
 /* Stagger children */

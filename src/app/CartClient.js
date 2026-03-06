@@ -9,7 +9,7 @@ import OrderSummaryCard from '@/components/OrderSummaryCard';
 
 export default function CartClient({ cartData }) {
   const router = useRouter();
-  const { state, dispatch, subtotal, grandTotal } = useCart();
+  const { state, dispatch, subtotal, grandTotal, isInitialized } = useCart();
 
   useEffect(() => {
     if (state.cartItems.length === 0 && cartData) {
@@ -32,8 +32,8 @@ export default function CartClient({ cartData }) {
   };
 
   return (
-    <div className="container">
-      <header className="page-header animate-fade-in-up">
+    <div className="container" style={{ opacity: isInitialized ? 1 : 0, transition: 'opacity 0.4s ease' }}>
+      <header className="page-header animate-fade-in">
         <div className="brand-container">
           <img
             src="https://prod-cdn.ecoyaan.com/pb-cs-app/images/ecoyaan-favicon.ico"
@@ -49,7 +49,7 @@ export default function CartClient({ cartData }) {
 
       <StepIndicator currentStep={1} />
 
-      <div className="section-header animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+      <div className="section-header animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <h1 className="section-title">Your Cart</h1>
         <span className="section-count">{items.length} {items.length === 1 ? 'item' : 'items'}</span>
       </div>
@@ -66,13 +66,13 @@ export default function CartClient({ cartData }) {
       </div>
 
       {items.length === 0 && (
-        <div className="empty-cart glass-card animate-fade-in-up">
+        <div className="empty-cart glass-card animate-fade-in">
           <p>Your cart is empty.</p>
         </div>
       )}
 
       {items.length > 0 && (
-        <div className="summary-section animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
+        <div className="summary-section animate-fade-in" style={{ animationDelay: '0.25s' }}>
           <div className="glass-card-accent">
             <OrderSummaryCard
               subtotal={calcSubtotal}

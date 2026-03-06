@@ -37,7 +37,7 @@ const fieldConfig = [
 
 export default function AddressPage() {
   const router = useRouter();
-  const { state, dispatch } = useCart();
+  const { state, dispatch, isInitialized } = useCart();
 
   const [form, setForm] = useState(state.shippingAddress || initialForm);
   const [errors, setErrors] = useState({});
@@ -47,16 +47,17 @@ export default function AddressPage() {
   const savedAddresses = state.savedAddresses || [];
 
   useEffect(() => {
+    if (!isInitialized) return;
     if (savedAddresses.length === 0) {
       setShowNewAddressForm(true);
     } else if (!state.shippingAddress) {
       // Select the first saved address by default if none selected
       dispatch({ type: 'SET_ADDRESS', payload: savedAddresses[0] });
     }
-  }, [savedAddresses.length, state.shippingAddress, dispatch, savedAddresses]);
+  }, [isInitialized, savedAddresses.length, state.shippingAddress, dispatch, savedAddresses]);
 
   // Redirect if cart is empty
-  if (state.cartItems.length === 0) {
+  if (isInitialized && state.cartItems.length === 0) {
     if (typeof window !== 'undefined') {
       router.replace('/');
     }
@@ -116,9 +117,9 @@ export default function AddressPage() {
   };
 
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper" style={{ opacity: isInitialized ? 1 : 0, transition: 'opacity 0.4s ease' }}>
       <div className="container" style={{ paddingBottom: '120px' }}>
-        <header className="page-header animate-fade-in-up">
+        <header className="page-header animate-fade-in">
           <div className="brand-container">
             <img
               src="https://prod-cdn.ecoyaan.com/pb-cs-app/images/ecoyaan-favicon.ico"
@@ -134,7 +135,7 @@ export default function AddressPage() {
 
         <StepIndicator currentStep={2} />
 
-        <div className="section-header animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+        <div className="section-header animate-fade-in" style={{ animationDelay: '0.1s' }}>
           <h1 className="section-title">Shipping Address</h1>
         </div>
 

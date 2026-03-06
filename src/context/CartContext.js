@@ -122,7 +122,7 @@ export function CartProvider({ children }) {
   const grandTotal = subtotal + state.shippingFee - state.discountApplied;
 
   return (
-    <CartContext.Provider value={{ state, dispatch, subtotal, grandTotal }}>
+    <CartContext.Provider value={{ state, dispatch, subtotal, grandTotal, isInitialized }}>
       {children}
     </CartContext.Provider>
   );
